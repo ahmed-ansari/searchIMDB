@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchMovies /> Initial render 1`] = `
+<RCTScrollView
+  ListEmptyComponent={
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        Please Search Movies..
+      </Text>
+    </View>
+  }
+  ListHeaderComponent={
+    <_default
+      onChangeText={[Function]}
+      placeholder="Search Movie"
+      value=""
+    />
+  }
+  data={Array []}
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <View
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          clearButtonMode="always"
+          onChangeText={[Function]}
+          placeholder="🔍 Search Movie"
+          placeholderTextColor="grey"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "backgroundColor": "lightgrey",
+              "borderColor": "grey",
+              "borderRadius": 10,
+              "fontSize": 17,
+              "margin": 10,
+              "padding": 8,
+              "paddingHorizontal": 20,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        Please Search Movies..
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`<SearchMovies /> initial render 1`] = `
+<RCTScrollView
+  ListEmptyComponent={
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        Please Search Movies..
+      </Text>
+    </View>
+  }
+  ListHeaderComponent={
+    <_default
+      onChangeText={[Function]}
+      placeholder="Search Movie"
+      value=""
+    />
+  }
+  data={Array []}
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View>
+    <View
+      onLayout={[Function]}
+    >
+      <View
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          clearButtonMode="always"
+          onChangeText={[Function]}
+          placeholder="🔍 Search Movie"
+          placeholderTextColor="grey"
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "backgroundColor": "lightgrey",
+              "borderColor": "grey",
+              "borderRadius": 10,
+              "fontSize": 17,
+              "margin": 10,
+              "padding": 8,
+              "paddingHorizontal": 20,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value=""
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "paddingTop": 10,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+          }
+        }
+      >
+        Please Search Movies..
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
