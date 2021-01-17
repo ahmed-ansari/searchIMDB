@@ -17,7 +17,7 @@ function FavouriteMoviesScreen() {
 
     const getFavouriteMovies = async () => {
         const _movies = await Storage.getItem(FavouriteMoviesKey)
-        setMovies(_movies)
+        if (_movies) setMovies(_movies)
     }
 
     const getSearchMovies = () => search ?
@@ -40,7 +40,7 @@ function FavouriteMoviesScreen() {
         const res = movies.filter(item => item.imdbID !== Movie.imdbID);
         setMovies(res);
         Toast
-            .show(Movie.Title + ' is removed to Favourite List')
+            .show(Movie.Title + ' is removed from the Favourite List')
     }
 
     const handleConfirm = (Movie) => {

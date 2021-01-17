@@ -36,7 +36,7 @@ function usePrevious(value) {
 
 function Query({ query, variables, children }) {
     const initialState = {
-        result: [],
+        results: [],
         loader: false
     }
     const [state, safeSetState] = useSafeSetState(initialState)
@@ -48,15 +48,14 @@ function Query({ query, variables, children }) {
         }
 
         safeSetState({ loader: true });
-        (key === GET_MOVIES) ? debouncedSave(inputs) : getData(inputs)
+        (key === GET_MOVIES) ? debouncedSave(inputs, state.results) : getData(inputs)
     });
 
-    const debouncedSave = useCallback(debounce(x => getData(x), 1000), [])
+    const debouncedSave = useCallback(debounce((x, y) => getData(x, y), 1000), [])
 
-    const getData = async ([_query, { param, key }]) => {
+    const getData = async ([_query, { param, key }], res) => {
         let parameters = {
             ..._query,
-            s: param
         }
         parameters = (key === GET_MOVIES) ?
             { ...parameters, s: param } :
@@ -64,8 +63,15 @@ function Query({ query, variables, children }) {
 
         const result = await Request(key, parameters);
         const { data } = result;
-        const { Search } = data;
-        safeSetState({ loader: false, result: Search })
+        let { Search } = data;
+
+        if (key === GET_MOVIES && _query.page > 1) {
+            console.log('state b' + query.page, state)
+
+            Search = [...res, ...Search]
+        }
+        console.log('Search ' + _query.page, Search)
+        safeSetState({ loader: false, results: Search })
     }
 
     const previousInputs = usePrevious([query, variables]);

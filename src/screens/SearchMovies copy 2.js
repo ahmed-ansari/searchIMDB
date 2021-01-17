@@ -21,8 +21,14 @@ function SearchMoviesScreen({ navigation }) {
 
     const userQuery = {
         s: '',
+        y: 'yes',
+        type: 'movie',
+        page: 1
     };
     const [search, setSearch] = useState('');
+    const [loadingMore, setLoadingMore] = useState(false);
+    const [page, setPage] = useState(1);
+
 
     const handleChangeText = searchValue => {
         setSearch(searchValue)
@@ -81,20 +87,55 @@ function SearchMoviesScreen({ navigation }) {
         </>
     )
 
+    const fetchMore = async (info, length) => {
+
+        console.log('length', length)
+        console.log('page', page)
+        console.log('Math.round(length / 10)', Math.round(length / 10))
+        console.log('page === (length / 10)', page === Math.round(length / 10))
+        if (page === Math.round(length / 10)) {
+            console.log('making false')
+            setLoadingMore(false);
+        }
+        if (loadingMore) {
+            return
+        }
+
+        setLoadingMore(true);
+        setPage(page + 1)
+
+
+    }
+
     return (
         <>
             <Query
                 variables={{ param: search, key: GET_MOVIES }}
-                query={userQuery}
+                query={{ ...userQuery, page }}
             >
                 {
-                    ({ result: movies, loader }) => (
+                    ({ results: movies, loader }) => (
                         <FlatList
                             data={movies}
                             renderItem={renderMovieItem}
                             keyExtractor={item => item.imdbID}
                             ListHeaderComponent={SearchBox}
                             ListEmptyComponent={renderEmpty(loader)}
+
+                            scrollEventThrottle={250}
+                            onEndReachedThreshold={0.5}
+                            onEndReached={info => {
+                                console.log('info', info);
+                                fetchMore(info, movies.length)
+                            }}
+                            ListFooterComponent={
+                                <View style={styles.footer}>
+                                    {loadingMore &&
+                                        <Text style={styles.footerText}>Loading More...</Text>
+                                    }
+                                </View>
+                            }
+
                         />
                     )
                 }
@@ -107,7 +148,13 @@ function SearchMoviesScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: { flex: 1, alignItems: 'center', paddingTop: 10 },
     text: { fontSize: 16, marginHorizontal: 10 },
-    loader: { marginTop: 40 }
+    loader: { marginTop: 40 },
+    footer: {
+        padding: 15,
+    },
+    footerText: {
+        fontWeight: '600',
+    }
 })
 
 export default SearchMoviesScreen;

@@ -53,10 +53,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     flex: 1,
   },
-  scrollView: {
-    backgroundColor: Colors.white,
-    flex: 1,
-  },
 });
 
 export default App;
