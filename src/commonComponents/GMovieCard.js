@@ -4,19 +4,24 @@ import {
     Text,
     TouchableOpacity,
     Image,
-    View
+    View,
+    ActivityIndicator
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import PropTypes from 'prop-types';
 import { Colors } from '../assets/colors';
-
+import Images from './../assets/images';
 const MovieCard = ({ handleTouch, handleShare, handleFavourite, handleDelete, item }) => {
     const { Poster, Title, Year } = item;
+    const Indicator = <ActivityIndicator />;
     return (
         <TouchableOpacity onPress={handleTouch} style={styles.button}>
             {
                 Poster !== 'N/A' ?
-                    <Image source={{ uri: Poster }} style={styles.image} /> :
+                    <Image source={{ uri: Poster }}
+                        style={styles.image}
+                        loadingIndicatorSource={Indicator}
+                    /> :
                     <Icon name="camera-off" style={styles.imageIcon} />
             }
 

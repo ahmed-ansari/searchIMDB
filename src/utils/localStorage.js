@@ -22,7 +22,6 @@ const Storage = {
         if (_res === null || _res === undefined) {
             Storage.setItem(key, [value])
         } else {
-            // const res = [..._res, value];
             let res = null;
             const index = _res.findIndex(item => item[param] === value[param]);
             if (index === 0 || index > 0) {
@@ -35,7 +34,7 @@ const Storage = {
     },
     removeItem: async (key, value, param) => {
         const _res = await Storage.getItem(key);
-        const res = _res.filter(item => item.imdbID !== value.imdbID);
+        const res = _res.filter(item => item[param] !== value[param]);
         Storage.setItem(key, res)
     }
 }
