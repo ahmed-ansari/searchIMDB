@@ -62,7 +62,6 @@ function Query({ query, variables, children }) {
             { ...parameters, i: param }
 
         const result = await Request(key, parameters);
-        console.log('res', result);
         const { data } = result;
         safeSetState({ loader: false, result: data })
     }
