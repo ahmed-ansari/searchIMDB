@@ -1,5 +1,6 @@
 /**
- * @format
+ * Registering a React Native Component
+ * Reactotron configured for the development environment
  */
 
 import { AppRegistry } from 'react-native';

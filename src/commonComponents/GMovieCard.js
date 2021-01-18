@@ -25,7 +25,6 @@ const MovieCard = ({ handleTouch, handleShare, handleFavourite, handleDelete, it
                 Poster !== 'N/A' ?
                     <Image source={{ uri: Poster }}
                         style={styles.image}
-                        loadingIndicatorSource={Indicator}
                         defaultSource={Images.noImage}
                     /> :
                     <Icon name="eye-slash" style={styles.imageIcon} />

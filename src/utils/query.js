@@ -37,7 +37,8 @@ function usePrevious(value) {
 function Query({ query, variables, children }) {
     const initialState = {
         result: [],
-        loader: false
+        loader: false,
+        error: false
     }
     const [state, safeSetState] = useSafeSetState(initialState)
     useEffect(() => {
@@ -47,7 +48,7 @@ function Query({ query, variables, children }) {
             return
         }
 
-        safeSetState({ loader: true });
+        safeSetState({ loader: true, error: false });
         (key === GET_MOVIES) ? debouncedSave(inputs) : getData(inputs)
     });
 
@@ -61,9 +62,25 @@ function Query({ query, variables, children }) {
             { ...parameters, s: param } :
             { ...parameters, i: param }
 
-        const result = await Request(key, parameters);
-        const { data } = result;
-        safeSetState({ loader: false, result: data })
+        let result;
+        let data;
+        let error;
+
+        try {
+            result = await Request(key, parameters);
+            data = result.data;
+            error = false;
+        } catch (err) {
+            console.log('QUERY response from Request 1', err);
+            if (key === GET_MOVIES) {
+                data = { Search: [] }
+            } else {
+                data = {}
+            }
+            error = { name: err.name, message: err.message };
+        }
+
+        safeSetState({ loader: false, result: data, error })
     }
 
     const previousInputs = usePrevious([query, variables]);

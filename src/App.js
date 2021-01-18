@@ -3,9 +3,12 @@ import {
   SafeAreaView,
   StyleSheet,
   StatusBar,
+  Text,
+  View
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ErrorBoundary from 'react-native-error-boundary';
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,13 +36,23 @@ const App = () => {
     SplashScreen.hide();
   }, []);
 
+  const ErrorFallback = ({ error }) => {
+    return (
+      <View style={styles.errorBoundary}>
+        <Text style={styles.error}>{error.toString()}</Text>
+      </View>
+    )
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.safeAreaView}>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+        </ErrorBoundary>
       </SafeAreaView>
     </>
   );
@@ -53,6 +66,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
     flex: 1,
   },
+  error: { fontSize: 16, marginHorizontal: 10, textAlign: 'center', marginTop: 20, color: Colors.love },
+  errorBoundary: { flex: 1, justifyContent: 'center' }
 });
 
 export default App;

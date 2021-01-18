@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ActivityIndicator, } from 'react-native';
+import { View, Text, Image, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GET_MOVIE } from './../serviceRequest/serviceConstants';
 import { Colors } from '../assets/colors';
@@ -12,6 +12,7 @@ const MovieDetail = ({ route, navigation }) => {
     const userQuery = {
         s: '',
     };
+
 
 
     const renderText = (label, value) => (<Text style={styles.textbox}>
@@ -27,11 +28,16 @@ const MovieDetail = ({ route, navigation }) => {
         >
             {
 
-                ({ result: movie, loader }) => (
-                    <View style={styles.container}>
+                ({ result: movie, loader, error }) => (
+                    <ScrollView style={styles.container}>
                         { loader && <ActivityIndicator color={Colors.primary} size="large" style={styles.loader} />}
+
                         {
-                            !loader && movie &&
+                            error &&
+                            <Text style={styles.error}>{error.message + '. Please try later.' || 'Error while fetching data'}</Text >
+                        }
+                        {
+                            !loader && movie && !error &&
                             <View style={styles.container}>
                                 <View style={styles.imageWrap}>
                                     {
@@ -48,7 +54,7 @@ const MovieDetail = ({ route, navigation }) => {
                                 {renderText('Released Date:', movie.Released)}
                             </View>
                         }
-                    </View>
+                    </ScrollView>
                 )
             }
         </Query>
@@ -56,15 +62,17 @@ const MovieDetail = ({ route, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-    loader: { flex: 1, justifyContent: 'center' },
-    container: { flex: 1, paddingHorizontal: 20, backgroundColor: Colors.white },
+    container: { flex: 1, paddingHorizontal: 20, backgroundColor: Colors.white, paddingBottom: 20 },
+    loader: { marginTop: '50%' },
     imageWrap: { alignItems: 'center', marginVertical: 20 },
     image: { height: 500, width: '100%', borderRadius: 8 },
     imageIcon: { fontSize: 150, height: 200, width: 200, textAlign: 'center', color: Colors.grey },
     text: { fontSize: 18, paddingVertical: 3, width: '100%', textAlign: 'center' },
     textbox: { fontSize: 18, paddingVertical: 3, width: '100%' },
     bold: { fontSize: 18, paddingVertical: 3, fontWeight: 'bold', flex: 1 },
-    value: { fontSize: 18 }
+    value: { fontSize: 18 },
+    error: { fontSize: 16, marginHorizontal: 10, textAlign: 'center', marginTop: 20, color: Colors.love },
+
 })
 
 export default MovieDetail;

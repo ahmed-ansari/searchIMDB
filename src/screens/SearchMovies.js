@@ -28,6 +28,7 @@ function SearchMoviesScreen({ navigation }) {
         s: '',
     };
 
+
     const [search, setSearch] = useState('');
 
     // update the search variable with user inputted text
@@ -66,7 +67,7 @@ function SearchMoviesScreen({ navigation }) {
         value={search}
         placeholder={'Search'} />)
 
-    // it renders the movie card for each row in flatlist 
+    // it renders the movie card for each row in the flatlist 
     const renderMovieItem = ({ item }) => (<GMovieCard
         item={item}
         handleFavourite={handleFavourite.bind(null, item)}
@@ -74,9 +75,10 @@ function SearchMoviesScreen({ navigation }) {
         handleTouch={handleTouch.bind(null, item)} />)
 
     /*  it renders the empty component for the flat list component
-    when there is no record */
+    * when there is no record 
+    */
 
-    const renderEmpty = loader => (
+    const renderEmpty = (loader, error) => (
         <>
             {
                 loader &&
@@ -87,7 +89,11 @@ function SearchMoviesScreen({ navigation }) {
                 />
             }
             {
-                !loader &&
+                error &&
+                <Text style={styles.error}>{`${error.message}. Please try again.` || 'Error while fetching data'}</Text>
+            }
+            {
+                !loader && !error &&
                 <View style={styles.container}>
                     <Text style={styles.text}>{search.length > 0 ?
                         'No Movies found' :
@@ -105,13 +111,13 @@ function SearchMoviesScreen({ navigation }) {
                 query={userQuery}
             >
                 {
-                    ({ result: { Search }, loader }) => console.log('movie', Search) || (
+                    ({ result: { Search }, loader, error }) => console.log('movie', Search) || (
                         <FlatList
                             data={Search}
                             renderItem={renderMovieItem}
                             keyExtractor={item => item.imdbID}
                             ListHeaderComponent={SearchBox}
-                            ListEmptyComponent={renderEmpty(loader)}
+                            ListEmptyComponent={renderEmpty(loader, error)}
                         />
                     )
                 }
@@ -124,7 +130,8 @@ function SearchMoviesScreen({ navigation }) {
 // Styles Object
 const styles = StyleSheet.create({
     container: { flex: 1, alignItems: 'center', paddingTop: 10 },
-    text: { fontSize: 16, marginHorizontal: 10 },
+    text: { fontSize: 16, marginHorizontal: 10, textAlign: 'center' },
+    error: { fontSize: 16, marginHorizontal: 10, textAlign: 'center', marginTop: 20, color: Colors.love },
     loader: { marginTop: 40 }
 })
 

@@ -11,6 +11,10 @@ function get(endUrl = '', payload) {
                     'Content-Type': 'application/json:charset=utf-8'
                 }
             })
+        .catch(function (error) {
+            console.log('There has been a problem with your request operation: ' + error.message);
+            throw error;
+        });
 }
 
 function post(endUrl = '', payload) {
@@ -20,6 +24,10 @@ function post(endUrl = '', payload) {
                 'Content-Type': 'application/json'
             }
         })
+        .catch(function (error) {
+            console.log('There has been a problem with your request operation: ' + error.message);
+            throw error;
+        });
 }
 
 export {
