@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ActivityIndicator, } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GET_MOVIE } from './../serviceRequest/serviceConstants';
+import Request from './../serviceRequest/apiRequest';
 import { Colors } from '../assets/colors';
 import Query from './../utils/query';
 import Images from './../assets/images';
@@ -13,6 +14,24 @@ const MovieDetail = ({ route, navigation }) => {
         s: '',
     };
 
+    // const [movie, setMovie] = useState(null);
+    // const [loader, setLoader] = useState(true);
+
+    const getMovie = async (imdbID) => {
+        const params = {
+            i: imdbID,
+            y: 'yes',
+            type: 'movie'
+        }
+        const result = await Request(GET_MOVIE, params);
+        const { data } = result;
+        // setMovie(data);
+        // setLoader(false)
+    }
+
+    useEffect(() => {
+        // getMovie(id)
+    }, [id])
 
     const renderText = (label, value) => (<Text style={styles.textbox}>
         {'\u2022' + " "}
@@ -31,7 +50,7 @@ const MovieDetail = ({ route, navigation }) => {
                     <View style={styles.container}>
                         { loader && <ActivityIndicator color={Colors.primary} size="large" style={styles.loader} />}
                         {
-                            !loader && movie &&
+                            movie &&
                             <View style={styles.container}>
                                 <View style={styles.imageWrap}>
                                     {
@@ -60,7 +79,7 @@ const styles = StyleSheet.create({
     container: { flex: 1, paddingHorizontal: 20, backgroundColor: Colors.white },
     imageWrap: { alignItems: 'center', marginVertical: 20 },
     image: { height: 500, width: '100%', borderRadius: 8 },
-    imageIcon: { fontSize: 150, height: 200, width: 200, textAlign: 'center', color: Colors.grey },
+    imageIcon: { fontSize: 150, height: 200, width: 200, textAlign: 'center', color: Colors.primary },
     text: { fontSize: 18, paddingVertical: 3, width: '100%', textAlign: 'center' },
     textbox: { fontSize: 18, paddingVertical: 3, width: '100%' },
     bold: { fontSize: 18, paddingVertical: 3, fontWeight: 'bold', flex: 1 },

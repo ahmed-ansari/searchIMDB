@@ -5,7 +5,7 @@ import {
   StatusBar,
 } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import Icon from 'react-native-vector-icons/Feather'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -20,8 +20,8 @@ Icon.loadFont();
 const RootStack = createStackNavigator();
 
 const RootNavigator = () => (
-  <RootStack.Navigator initialRouteName="Home">
-    <RootStack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+  <RootStack.Navigator initialRouteName="Home" >
+    <RootStack.Screen name="Home" component={HomeScreen} options={{ title: 'Home', headerShown: false }} />
     <RootStack.Screen name="SearchMovies" component={SearchMoviesScreen} options={{ title: 'Search Movies' }} />
     <RootStack.Screen name="MovieDetail" component={MovieDetailScreen} options={({ route }) => ({ title: route.params.name })} />
     <RootStack.Screen name="FavouriteMovies" component={FavouriteMoviesScreen} options={{ title: 'Favourite Movies' }} />

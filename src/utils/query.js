@@ -56,16 +56,15 @@ function Query({ query, variables, children }) {
     const getData = async ([_query, { param, key }]) => {
         let parameters = {
             ..._query,
-            s: param
         }
         parameters = (key === GET_MOVIES) ?
             { ...parameters, s: param } :
             { ...parameters, i: param }
 
         const result = await Request(key, parameters);
+        console.log('res', result);
         const { data } = result;
-        const { Search } = data;
-        safeSetState({ loader: false, result: Search })
+        safeSetState({ loader: false, result: data })
     }
 
     const previousInputs = usePrevious([query, variables]);

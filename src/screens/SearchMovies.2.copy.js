@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import debounce from 'lodash.debounce';
-import Request from './../serviceRequest/apiRequest';
-import { GET_MOVIES } from './../serviceRequest/serviceConstants';
-import { GSearchBox, GMovieCard } from './../commonComponents';
+import Request from '../serviceRequest/apiRequest';
+import { GET_MOVIES } from '../serviceRequest/serviceConstants';
+import { GSearchBox, GMovieCard } from '../commonComponents';
 import { Colors } from '../assets/colors';
 import Storage, { FavouriteMoviesKey } from '../utils/localStorage';
-import Query from './../utils/query';
+import Query from '../utils/query';
 
 
 function SearchMoviesScreen({ navigation }) {

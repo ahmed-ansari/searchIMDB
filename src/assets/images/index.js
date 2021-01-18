@@ -1,5 +1,5 @@
 const Images = {
-    loader: require('./loader.gif')
+    noImage: require('../images/no-image.jpg')
 }
 
 export default Images;
