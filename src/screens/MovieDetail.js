@@ -6,20 +6,34 @@ import { Colors } from '../assets/colors';
 import Query from './../utils/query';
 import Images from './../assets/images';
 
+/* **************************\
+Component: MovieDetailScreen.
+Explanation:
+This component is used for loading the Movie Detail Screen.
+============================
+Creator: Ansari || Date: 2020-01-18
+\************************** */
+
 const MovieDetail = ({ route, navigation }) => {
     const { id } = route.params;
 
     const userQuery = {
-        s: '',
+        i: '',
     };
 
 
+    /* 
+    * This function will render the text 
+    * for the rows such as rating , year and release date 
+    * */
 
-    const renderText = (label, value) => (<Text style={styles.textbox}>
-        {'\u2022' + " "}
-        <Text style={styles.bold}>{label}</Text>
-        <Text style={styles.value}> {value}</Text>
-    </Text>)
+    const renderText = (label, value) => (
+        <Text style={styles.textbox}>
+            {'\u2022' + " "}
+            <Text style={styles.bold}>{label}</Text>
+            <Text style={styles.value}> {value}</Text>
+        </Text>
+    )
 
     return (
         <Query
@@ -43,7 +57,7 @@ const MovieDetail = ({ route, navigation }) => {
                                     {
                                         movie.Poster !== 'N/A' ?
                                             <Image source={{ uri: movie.Poster }} style={styles.image} resizeMode="contain"
-                                                defaultSource={Images.noImage}
+                                                defaultSource={Images.noIcon}
                                             /> :
                                             <Icon name="eye-slash" style={styles.imageIcon} />
                                     }
@@ -60,6 +74,10 @@ const MovieDetail = ({ route, navigation }) => {
         </Query>
     )
 }
+
+/* 
+*   Styles Object for the Movie detail screen
+* */
 
 const styles = StyleSheet.create({
     container: { flex: 1, paddingHorizontal: 20, backgroundColor: Colors.white, paddingBottom: 20 },

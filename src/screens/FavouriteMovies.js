@@ -10,6 +10,7 @@ import {
 import Toast from 'react-native-simple-toast';
 import { GSearchBox, GMovieCard } from './../commonComponents';
 import Storage, { FavouriteMoviesKey } from '../utils/localStorage';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 /* **************************\
 Component: FavouriteMoviesScreen.
@@ -23,34 +24,39 @@ function FavouriteMoviesScreen() {
     const [search, setSearch] = useState('');
     const [movies, setMovies] = useState([]);
 
-    // fetch all favourite movies from the local async storage
+    /* This function will fetch all favourite movies from the local async storage */
+
     const getFavouriteMovies = async () => {
         const _movies = await Storage.getItem(FavouriteMoviesKey)
         if (_movies) setMovies(_movies)
     }
 
-    /*  returns filtered array from movie list
+    /*  This function will returns filtered array from movie list
     based on the user input text in searchbox */
 
     const getSearchMovies = () => search ?
         movies.filter(movie => movie.Title.includes(search)) : movies
 
-    // update the user input text to the seach variable
+    /* This function will update the user inputted text to the seach variable */
+
     const handleSearchText = searchValue => setSearch(searchValue)
 
-    // fetch all movies from the local store only once
+    /* This function will fetch all movies from the local store only once */
+
     useEffect(() => {
         getFavouriteMovies()
     }, [])
 
-    // it shows the search box the screen
+    /* This function will render the search box the screen */
+
     const SearchBox = (<GSearchBox
         onChangeText={handleSearchText}
         value={search}
         placeholder={'Search'}
     />)
 
-    // it handles the delete operation from the local store
+    /* This function will handles the delete operation from the local store */
+
     const handleDelete = Movie => {
         Storage.removeItem(FavouriteMoviesKey, Movie, 'imdbID');
         const res = movies.filter(item => item.imdbID !== Movie.imdbID);
@@ -59,7 +65,8 @@ function FavouriteMoviesScreen() {
             .show(Movie.Title + ' is removed from the Favourite List')
     }
 
-    // Confirms the user if he want to delete it for sure
+    /* THis function will confirms the user if he want to delete it for sure */
+
     const handleConfirm = (Movie) => {
         Alert.alert(
             'Are you sure?',
@@ -76,7 +83,8 @@ function FavouriteMoviesScreen() {
         );
     }
 
-    // it share movie to social groups such as gmail, whtsapp, etc.
+    /* This function will share movie to social groups such as gmail, whtsapp, etc. */
+
     const handleShare = (item) => {
         const shareOptions = {
             title: item.Title,
@@ -87,7 +95,8 @@ function FavouriteMoviesScreen() {
         Share.share(shareOptions);
     }
 
-    // it renders the empty component to the flat list when nothing to show
+    /* This function will renders the empty component to the flat list when nothing to show */
+
     const renderEmpty = () => {
         const comp = (<View style={styles.container}>
             <Text style={styles.text}>{'No Favourite Movies found.'}</Text>
@@ -111,14 +120,17 @@ function FavouriteMoviesScreen() {
             keyExtractor={item => item.imdbID}
             ListHeaderComponent={SearchBox}
             ListEmptyComponent={renderEmpty()}
+            style={styles.flatlist}
         />
     )
 }
 
 // styles object
 const styles = StyleSheet.create({
-    container: { flex: 1, alignItems: 'center', paddingTop: 10 },
-    text: { fontSize: 16 }
+    container: { flex: 1, alignItems: 'center', paddingTop: 10, backgroundColor: Colors.white },
+    text: { fontSize: 16 },
+    flatlist: { backgroundColor: 'white' }
+
 })
 
 export default FavouriteMoviesScreen;

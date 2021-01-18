@@ -9,6 +9,16 @@ import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Colors } from '../assets/colors';
 
+/* **************************\
+Component: Searchbox.
+Explanation:
+This component is used for showing the search box
+in the flatlist .
+============================
+Creator: Ansari || Date: 2020-01-18
+\************************** */
+
+
 const SearchBox = ({ onChangeText, value, placeholder }) => (
     <View style={styles.wrapper}>
         <Icon name="search" style={styles.icon} />
@@ -33,16 +43,29 @@ SearchBox.propTypes = {
     placeholder: PropTypes.string.isRequired
 }
 
+SearchBox.defaultProps = {
+    onChangeText: () => { },
+    value: '',
+    placeholder: () => { },
+}
+
+
+
 export default SearchBox;
 const styles = StyleSheet.create({
     wrapper: {
         flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 10,
-        backgroundColor: Colors.white,
         borderRadius: 10,
         paddingHorizontal: 10,
-        marginVertical: 10
+        marginVertical: 10,
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderColor: Colors.grey
+
     },
     icon: {
         fontSize: 18,

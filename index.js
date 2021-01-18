@@ -1,6 +1,6 @@
 /**
  * Registering a React Native Component
- * Reactotron configured for the development environment
+ * Reactotron configured for the development environment only
  */
 
 import { AppRegistry } from 'react-native';

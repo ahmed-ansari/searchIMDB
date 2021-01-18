@@ -9,6 +9,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Colors } from '../assets/colors';
 
+/* **************************\
+Component: Button.
+Explanation:
+This component is used for showing the button
+============================
+Creator: Ansari || Date: 2020-01-18
+\************************** */
+
 const Button = ({ onPress, style, title, icon }) => (
     <TouchableOpacity onPress={onPress} style={styles.button}>
         <Icon name={icon} style={styles.icon} />
@@ -21,6 +29,12 @@ Button.propTypes = {
     style: PropTypes.object,
     title: PropTypes.string,
     icon: PropTypes.string
+}
+
+Button.defaultProps = {
+    onPress: () => { },
+    title: 'Click',
+    icon: 'home',
 }
 export default Button;
 

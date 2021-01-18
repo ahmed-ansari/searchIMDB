@@ -10,7 +10,6 @@ import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ErrorBoundary from 'react-native-error-boundary';
 
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -19,8 +18,16 @@ import HomeScreen from './screens/Home';
 import SearchMoviesScreen from './screens/SearchMovies';
 import FavouriteMoviesScreen from './screens/FavouriteMovies';
 import MovieDetailScreen from './screens/MovieDetail';
+
+
 Icon.loadFont();
 const RootStack = createStackNavigator();
+
+
+/* 
+* This function return Root Navigation for the app,
+* it holds all the screen and configured using the react navigation
+*/
 
 const RootNavigator = () => (
   <RootStack.Navigator initialRouteName="Home" >
@@ -35,6 +42,10 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  /* This function is Error fallback component and 
+  * return a message to the sreen if found any error 
+  */
 
   const ErrorFallback = ({ error }) => {
     return (
@@ -57,9 +68,6 @@ const App = () => {
     </>
   );
 };
-
-
-
 
 const styles = StyleSheet.create({
   safeAreaView: {

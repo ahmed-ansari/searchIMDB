@@ -1,3 +1,12 @@
+/* **************************\
+Function: AsyncStorage.
+Explanation:
+This Function is used for fetching and saving the
+values into Async storage.
+============================
+Creator: Ansari || Date: 2020-01-17
+\************************** */
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const Storage = {
     getItem: async (key) => {

@@ -5,7 +5,6 @@ import {
     TouchableOpacity,
     Image,
     View,
-    ActivityIndicator,
     TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,20 +12,30 @@ import PropTypes from 'prop-types';
 import { Colors } from '../assets/colors';
 import Images from './../assets/images';
 
+/* **************************\
+Component: MovieCard.
+Explanation:
+This component is used for loading the  Movie items for each item
+in the flatlist .
+============================
+Creator: Ansari || Date: 2020-01-18
+\************************** */
 
 const MovieCard = ({ handleTouch, handleShare, handleFavourite, handleDelete, item }) => {
     const { Poster, Title, Year } = item;
-    const Indicator = <ActivityIndicator />;
 
     const [favourite, setFavourite] = useState(false);
     return (
         <TouchableOpacity onPress={handleTouch} style={styles.button}>
             {
                 Poster !== 'N/A' ?
-                    <Image source={{ uri: Poster }}
-                        style={styles.image}
-                        defaultSource={Images.noImage}
-                    /> :
+                    <View style={styles.imageBox}>
+                        <Image source={{ uri: Poster }}
+                            style={styles.image}
+                            defaultSource={Images.noIcon}
+                        />
+                    </View>
+                    :
                     <Icon name="eye-slash" style={styles.imageIcon} />
             }
 
@@ -59,12 +68,18 @@ MovieCard.propTypes = {
     handleDelete: PropTypes.func,
     item: PropTypes.object.isRequired,
 }
+MovieCard.defaultProps = {
+    handleTouch: () => { },
+    handleShare: () => { },
+    item: {},
+}
 export default MovieCard;
 
 const styles = StyleSheet.create({
     button: { flexDirection: 'row', paddingVertical: 8, marginHorizontal: 10, borderBottomWidth: 1, borderBottomColor: 'lightgrey' },
     image: { height: 120, width: 120, borderRadius: 6 },
-    imageIcon: { fontSize: 100, height: 120, width: 120, textAlign: 'center', color: Colors.grey, },
+    imageBox: { height: 120, width: 120, borderRadius: 6, justifyContent: 'center', alignItems: 'center' },
+    imageIcon: { backgroundColor: Colors.white, fontSize: 100, height: 120, width: 120, textAlign: 'center', color: Colors.grey, },
     title: { fontSize: 20, width: '95%', marginTop: 3, },
     year: { fontSize: 18, marginTop: 6, },
     fav: { color: Colors.primary, fontSize: 20, padding: 5, marginBottom: 6, marginHorizontal: 4 },

@@ -12,7 +12,16 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 import { Colors } from '../assets/colors';
 
-const MovieCard = ({ handleTouch, handleShare, handleFavourite, handleDelete, item }) => {
+/* **************************\
+Component: MovieItem.
+Explanation:
+This component is used for loading the  Movie items for each item
+in the flatlist .
+============================
+Creator: Ansari || Date: 2020-01-18
+\************************** */
+
+const MovieItem = ({ handleTouch, handleShare, handleFavourite, handleDelete, item }) => {
     const { Poster, Title, Year } = item;
     const Indicator = <ActivityIndicator />;
 
@@ -47,14 +56,14 @@ const MovieCard = ({ handleTouch, handleShare, handleFavourite, handleDelete, it
     )
 };
 
-MovieCard.propTypes = {
+MovieItem.propTypes = {
     handleTouch: PropTypes.func,
     handleShare: PropTypes.func,
     handleFavourite: PropTypes.func,
     handleDelete: PropTypes.func,
     item: PropTypes.object.isRequired,
 }
-export default MovieCard;
+export default MovieItem;
 
 const styles = StyleSheet.create({
     button: { flexDirection: 'row', paddingVertical: 8, marginHorizontal: 10, borderBottomWidth: 1, borderBottomColor: 'lightgrey', },

@@ -4,6 +4,12 @@ import isEqual from 'lodash.isequal';
 import Request from './../serviceRequest/apiRequest';
 import { GET_MOVIES } from './../serviceRequest/serviceConstants';
 
+/*
+* This function is used to update the reducer with
+* the new state it received and it returns the 
+* current state and dispatch
+*/
+
 function useSetState(initialState) {
     const [state, setState] = useReducer(
         (_state, newState) => ({ ..._state, ...newState }),
@@ -11,6 +17,12 @@ function useSetState(initialState) {
     );
     return [state, setState]
 }
+
+/*
+* This function is used to make sure that state updates happend 
+* only in the mount state of component and
+* returns the state and safeSetState function
+*/
 
 function useSafeSetState(initialState) {
     const [state, setState] = useSetState(initialState)
@@ -24,6 +36,12 @@ function useSafeSetState(initialState) {
     return [state, safeSetState];
 }
 
+/*
+* This function is used to hold the 
+* previous state of the component into the reference variable
+* and returns the reference variable
+*/
+
 function usePrevious(value) {
     const ref = useRef()
     useEffect(() => {
@@ -33,6 +51,11 @@ function usePrevious(value) {
     return ref.current;
 }
 
+/*
+* This function is used to query the server with the given params
+* also it returns the object contains the response from the request
+* with loader and error ,in case if any
+*/
 
 function Query({ query, variables, children }) {
     const initialState = {
@@ -40,7 +63,8 @@ function Query({ query, variables, children }) {
         loader: false,
         error: false
     }
-    const [state, safeSetState] = useSafeSetState(initialState)
+    const [state, safeSetState] = useSafeSetState(initialState);
+
     useEffect(() => {
         const inputs = [query, variables];
         const { param, key } = variables;
@@ -53,6 +77,11 @@ function Query({ query, variables, children }) {
     });
 
     const debouncedSave = useCallback(debounce(x => getData(x), 1000), [])
+
+    /*
+    * This function is used for making a request to the server
+    * and returns the response it received
+    */
 
     const getData = async ([_query, { param, key }]) => {
         let parameters = {

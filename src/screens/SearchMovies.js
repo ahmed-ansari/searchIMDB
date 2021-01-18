@@ -31,22 +31,23 @@ function SearchMoviesScreen({ navigation }) {
 
     const [search, setSearch] = useState('');
 
-    // update the search variable with user inputted text
+    // This function updates the search variable with user inputted text
     const handleChangeText = searchValue => {
         setSearch(searchValue)
     }
 
-    /* Save Movie to local async store on heart icon touch and
-    and shows Toast to the user that the movies has been added 
-    to the list sucessfully
-       */
+    /* This function will Save Movie to local async store on heart icon touch and
+    * and shows Toast to the user that the movies has been added 
+    * to the favourite list sucessfully
+    */
 
     const handleFavourite = (Movie) => {
         Toast.show(Movie.Title + ' is added to the Favourite List');
         Storage.pushItem(FavouriteMoviesKey, Movie, 'imdbID');
     }
 
-    // Share selected movie to social such as whatsapp , gmail etc
+    /* This function will share selected movie to social such as whatsapp , gmail etc */
+
     const handleShare = item => {
         const shareOptions = {
             title: item.Title,
@@ -57,25 +58,28 @@ function SearchMoviesScreen({ navigation }) {
         Share.share(shareOptions);
     }
 
-    // Navigate user to the Movie Detail Screen
+    /*  This function will navigate user to the Movie Detail Screen */
+
     const handleTouch = Movie => navigation.
         navigate('MovieDetail', { name: Movie.Title, id: Movie.imdbID })
 
-    // it renders the Searchbox to the screen
+    /* This function renders the Searchbox to the screen */
+
     const SearchBox = (<GSearchBox
         onChangeText={handleChangeText}
         value={search}
         placeholder={'Search'} />)
 
-    // it renders the movie card for each row in the flatlist 
+    /* This function renders the movie card for each row in the flatlist  */
+
     const renderMovieItem = ({ item }) => (<GMovieCard
         item={item}
         handleFavourite={handleFavourite.bind(null, item)}
         handleShare={handleShare}
         handleTouch={handleTouch.bind(null, item)} />)
 
-    /*  it renders the empty component for the flat list component
-    * when there is no record 
+    /*  This function will renders the empty component for the flat list component
+    *  when there is no record 
     */
 
     const renderEmpty = (loader, error) => (
@@ -117,6 +121,7 @@ function SearchMoviesScreen({ navigation }) {
                             renderItem={renderMovieItem}
                             keyExtractor={item => item.imdbID}
                             ListHeaderComponent={SearchBox}
+                            style={styles.flatlist}
                             ListEmptyComponent={renderEmpty(loader, error)}
                         />
                     )
@@ -129,10 +134,11 @@ function SearchMoviesScreen({ navigation }) {
 
 // Styles Object
 const styles = StyleSheet.create({
-    container: { flex: 1, alignItems: 'center', paddingTop: 10 },
+    container: { flex: 1, alignItems: 'center', paddingTop: 10, },
     text: { fontSize: 16, marginHorizontal: 10, textAlign: 'center' },
     error: { fontSize: 16, marginHorizontal: 10, textAlign: 'center', marginTop: 20, color: Colors.love },
-    loader: { marginTop: 40 }
+    loader: { marginTop: 40 },
+    flatlist: { backgroundColor: 'white' }
 })
 
 export default SearchMoviesScreen;
