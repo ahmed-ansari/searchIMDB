@@ -33,6 +33,7 @@ const SearchBox = ({ onChangeText, value, placeholder }) => (
             returnKeyLabel='Done'
             returnKeyType='done'
             autoCorrect={false}
+            testID='searchbox'
         />
     </View>
 )

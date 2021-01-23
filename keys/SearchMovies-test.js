@@ -9,6 +9,11 @@ import { GSearchBox } from './../src/commonComponents';
 
 // "collectCoverage": true,
 
+
+
+
+
+
 const createTestProps = (props) => ({
     navigation: {
         navigate: jest.fn()
